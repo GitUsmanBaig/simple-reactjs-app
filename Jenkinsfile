@@ -17,13 +17,16 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            steps {
-                script {
-                    // Building a Docker image from the Dockerfile in the project root directory
-                    sh "docker build -t lab11:1 ."
-                }
+    steps {
+        dir('simple-reactjs-app') {
+            script {
+                // Building a Docker image from the Dockerfile in the project root directory
+                sh "docker build -t lab11:1"
             }
         }
+    }
+}
+
 
         stage('Run Docker Image') {
             steps {
