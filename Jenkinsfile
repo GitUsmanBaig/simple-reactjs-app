@@ -21,7 +21,7 @@ pipeline {
                 dir('simple-reactjs-app') {
                     script {
                         // Building a Docker image from the Dockerfile in the project root directory
-                        sh "docker build ."
+                        sh "docker build -t simple-reactjs-app ."
                     }
                 }
             }
