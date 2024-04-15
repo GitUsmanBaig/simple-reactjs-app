@@ -18,9 +18,7 @@ pipeline {
             steps {
                 dir('simple-reactjs-app') {
                     script {
-                        // sh "docker build -t simple-reactjs-app ."
-                        sh "sleep 3m"
-                        sh "echo 'Build Docker Image'"
+                        sh "docker build -t simple-reactjs-app ."
                     }
                 }
             }
@@ -29,21 +27,16 @@ pipeline {
 
         stage('Run Docker Image') {
             steps {
-                // sh "docker run -d -p 80:80 simple-reactjs-app"
-                sh "sleep 1m"
-                sh "echo 'Run Docker Image'"
+                sh "docker run -d -p 80:80 simple-reactjs-app"
             }
         }
 
         stage('Push Docker Image') {
             steps {
                 script {
-                    // docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                    //     sh "docker push simple-reactjs-app"
-                       
-                    // }
-                     sh "sleep 1m"
-                        sh "echo 'Push Docker Image'"
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        sh "docker push simple-reactjs-app"
+                    }
                 }
             }
         }
