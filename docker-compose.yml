@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      NODE_ENV: production
+    volumes:
+      - .:/app
+      - /app/node_modules
+  # Uncomment the following lines if you need a database, for example, MongoDB
+  # db:
+  #   image: mongo
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo_data:/data/db
+  # volumes:
+  #   mongo_data:
