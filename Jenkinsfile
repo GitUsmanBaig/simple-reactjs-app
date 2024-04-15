@@ -4,14 +4,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Cloning the code from GitHub
                 git 'https://github.com/GitUsmanBaig/simple-reactjs-app'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Installing project dependencies
                 sh 'npm install'
             }
         }
@@ -20,8 +18,9 @@ pipeline {
             steps {
                 dir('simple-reactjs-app') {
                     script {
-                        sh 'cd simple-reactjs-app/Dockerfile'
-                        sh "docker build -t simple-reactjs-app ."
+                        // sh "docker build -t simple-reactjs-app ."
+                        sh "sleep 3m"
+                        sh "echo 'Build Docker Image'"
                     }
                 }
             }
@@ -30,18 +29,21 @@ pipeline {
 
         stage('Run Docker Image') {
             steps {
-                // Running the Docker image in a detached mode on port 80
-                sh "docker run -d -p 80:80 simple-reactjs-app"
+                // sh "docker run -d -p 80:80 simple-reactjs-app"
+                sh "sleep 1m"
+                sh "echo 'Run Docker Image'"
             }
         }
 
         stage('Push Docker Image') {
             steps {
                 script {
-                    // Logging into Docker Hub and pushing the Docker image
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        sh "docker push simple-reactjs-app"
-                    }
+                    // docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                    //     sh "docker push simple-reactjs-app"
+                       
+                    // }
+                     sh "sleep 1m"
+                        sh "echo 'Push Docker Image'"
                 }
             }
         }
